@@ -1,0 +1,191 @@
+type: collection.insomnia.rest/5.0
+schema_version: "5.1"
+name: round 0 assignment
+meta:
+  id: wrk_21cfd8a606014cdcbffc7ae04e7f61fe
+  created: 1780924710081
+  modified: 1780924710081
+  description: ""
+collection:
+  - url: http://localhost:3000/api/auth/register
+    name: Register
+    meta:
+      id: req_953a02ccc9cf4f37a53a5a712521f0af
+      created: 1780924766932
+      modified: 1780925298020
+      isPrivate: false
+      description: ""
+      sortKey: -1780924766932
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+          "email": "evaluator@example.com",
+          "password": "securepassword123"
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/12.6.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:3000/api/auth/login
+    name: Login
+    meta:
+      id: req_99bfa6a3007e4d83a3112fa545286702
+      created: 1780925131451
+      modified: 1780925243842
+      isPrivate: false
+      description: ""
+      sortKey: -1780925131451
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"email": "ot.gaming132@gmail.com",
+        	"password": "hclanka123"
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/12.6.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:3000/api/tasks
+    name: Create Task
+    meta:
+      id: req_97a196300fc34756b6097d3a40814eef
+      created: 1780925313030
+      modified: 1780926555076
+      isPrivate: false
+      description: ""
+      sortKey: -1780925313030
+    method: POST
+    body:
+      mimeType: application/json
+      text: >-
+        {
+          "title": "Review Backend Assignment",
+          "description": "Check the code quality, API routes, and database schema."
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/12.6.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:3000/api/tasks
+    name: Get Tasks
+    meta:
+      id: req_89a1f7f37b0946a0aec633eef723e87c
+      created: 1780926765641
+      modified: 1780926793604
+      isPrivate: false
+      description: ""
+      sortKey: -1780926765641
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/12.6.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:3000/api/tasks/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIwNzk5MGEzOS0zYWQ0LTQxNDItYTY3MC02ZDE5NzdlYzU2Y2IiLCJyb2xlIjoidXNlciIsImlhdCI6MTc4MDkyNTI0NiwiZXhwIjoxNzgxMDExNjQ2fQ.mxM7mIiLD0FSMJ54G9Sk5wT4MSeYdg92Xofa-eRD5K0
+    name: Update Task
+    meta:
+      id: req_cbca9ab2e5ac49618059d6f1460cb03d
+      created: 1780926911898
+      modified: 1780926998926
+      isPrivate: false
+      description: ""
+      sortKey: -1780926911898
+    method: PATCH
+    headers:
+      - name: User-Agent
+        value: insomnia/12.6.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:3000/api/tasks/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIwNzk5MGEzOS0zYWQ0LTQxNDItYTY3MC02ZDE5NzdlYzU2Y2IiLCJyb2xlIjoidXNlciIsImlhdCI6MTc4MDkyNTI0NiwiZXhwIjoxNzgxMDExNjQ2fQ.mxM7mIiLD0FSMJ54G9Sk5wT4MSeYdg92Xofa-eRD5K0
+    name: Delete Task
+    meta:
+      id: req_e2fda09a250042769c87d1183336abd3
+      created: 1780927004788
+      modified: 1780927027731
+      isPrivate: false
+      description: ""
+      sortKey: -1780927004788
+    method: DELETE
+    headers:
+      - name: User-Agent
+        value: insomnia/12.6.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_57653dddda6cfe4ac921b309847c444c52f49f22
+    created: 1780924710083
+    modified: 1780924710083
+environments:
+  name: Base Environment
+  meta:
+    id: env_57653dddda6cfe4ac921b309847c444c52f49f22
+    created: 1780924710083
+    modified: 1780925266459
+    isPrivate: false
+  data:
+    "":
+      base_url: http://localhost:3000/api/
+      token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIwNzk5MGEzOS0zYWQ0LTQxNDItYTY3MC02ZDE5NzdlYzU2Y2IiLCJyb2xlIjoidXNlciIsImlhdCI6MTc4MDkyNTI0NiwiZXhwIjoxNzgxMDExNjQ2fQ.mxM7mIiLD0FSMJ54G9Sk5wT4MSeYdg92Xofa-eRD5K0
