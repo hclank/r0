@@ -4,14 +4,14 @@ import { tasks } from "@/db/schema";
 import { eq, and } from "drizzle-orm";
 import { requireAuth } from "@/lib/middleware";
 
-export async function DELETE(
-  req: Request,
-  { params }: { params: { taskId: string } },
-) {
+type RouteContext = { params: Promise<{ taskId: string }> };
+
+export async function DELETE(req: Request, context: RouteContext) {
   try {
     const { user, errorResponse } = requireAuth(req);
     if (errorResponse) return errorResponse;
 
+    const params = await context.params;
     const { taskId } = params;
     const deletedTask = await db
       .delete(tasks)
@@ -38,13 +38,11 @@ export async function DELETE(
   }
 }
 
-export async function PATCH(
-  req: Request,
-  { params }: { params: { taskId: string } },
-) {
+export async function PATCH(req: Request, context: RouteContext) {
   try {
     const { user, errorResponse } = requireAuth(req);
     if (errorResponse) return errorResponse;
+    const params = await context.params;
     const { taskId } = params;
     const body = await req.json();
 

@@ -85,6 +85,53 @@ export default function DashboardPage() {
     }
   };
 
+  const handleUpdateStatus = async (taskId: string, newStatus: string) => {
+    const token = localStorage.getItem("token");
+    try {
+      const res = await fetch(`/api/tasks/${taskId}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ status: newStatus }),
+      });
+
+      if (!res.ok) throw new Error("Failed to update status");
+
+      setTasks((prev) =>
+        prev.map((task) =>
+          task.id === taskId
+            ? { ...task, status: newStatus as Task["status"] }
+            : task,
+        ),
+      );
+    } catch (err) {
+      alert("Failed to update task status.");
+    }
+  };
+
+  const handleDeleteTask = async (taskId: string) => {
+    if (!confirm("Are you sure you want to delete this task?")) return;
+
+    const token = localStorage.getItem("token");
+    try {
+      const res = await fetch(`/api/tasks/${taskId}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (!res.ok) throw new Error("Failed to delete task");
+
+      // Remove the task from local state
+      setTasks((prev) => prev.filter((task) => task.id !== taskId));
+    } catch (err) {
+      alert("Failed to delete task.");
+    }
+  };
+
   const handleLogout = () => {
     localStorage.removeItem("token");
     router.push("/login");
@@ -129,7 +176,7 @@ export default function DashboardPage() {
                 <input
                   type="text"
                   required
-                  className="mt-1 block w-full text-black rounded-md border border-gray-300 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                  className="mt-1 block w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
                 />
@@ -139,7 +186,7 @@ export default function DashboardPage() {
                   Description
                 </label>
                 <textarea
-                  className="mt-1 block w-full text-black rounded-md border border-gray-300 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                  className="mt-1 block w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                   rows={3}
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
@@ -167,10 +214,10 @@ export default function DashboardPage() {
                 {tasks.map((task) => (
                   <li
                     key={task.id}
-                    className="rounded-md border border-gray-200 p-4 hover:bg-gray-50 transition-colors"
+                    className="rounded-md border border-gray-200 p-4 hover:bg-gray-50 transition-colors bg-white"
                   >
-                    <div className="flex justify-between items-start">
-                      <div>
+                    <div className="flex flex-col sm:flex-row justify-between sm:items-start gap-4">
+                      <div className="flex-1">
                         <h3 className="font-medium text-gray-900">
                           {task.title}
                         </h3>
@@ -180,9 +227,27 @@ export default function DashboardPage() {
                           </p>
                         )}
                       </div>
-                      <span className="inline-flex items-center rounded-full bg-yellow-100 px-2.5 py-0.5 text-xs font-medium text-yellow-800">
-                        {task.status.replace("_", " ")}
-                      </span>
+
+                      <div className="flex items-center gap-3">
+                        <select
+                          value={task.status}
+                          onChange={(e) =>
+                            handleUpdateStatus(task.id, e.target.value)
+                          }
+                          className="rounded-md border border-gray-300 bg-white px-2 py-1 text-sm shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-gray-700"
+                        >
+                          <option value="pending">Pending</option>
+                          <option value="in_progress">In Progress</option>
+                          <option value="completed">Completed</option>
+                        </select>
+
+                        <button
+                          onClick={() => handleDeleteTask(task.id)}
+                          className="text-red-600 hover:text-red-800 text-sm font-medium transition-colors"
+                        >
+                          Delete
+                        </button>
+                      </div>
                     </div>
                   </li>
                 ))}
