@@ -134,7 +134,7 @@ export default function DashboardPage() {
 
   const handleLogout = () => {
     localStorage.removeItem("token");
-    router.push("/login");
+    router.push("/");
   };
 
   if (loading)
@@ -176,7 +176,7 @@ export default function DashboardPage() {
                 <input
                   type="text"
                   required
-                  className="mt-1 block w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                  className="mt-1 block w-full text-black rounded-md border border-gray-300 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
                 />
@@ -186,7 +186,7 @@ export default function DashboardPage() {
                   Description
                 </label>
                 <textarea
-                  className="mt-1 block w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                  className="mt-1 block w-full text-black rounded-md border border-gray-300 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                   rows={3}
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
